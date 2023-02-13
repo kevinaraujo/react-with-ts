@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
-function Lista() {
+function List() {
     return (
         <aside>
             <h2>Study of the day</h2>
@@ -27,4 +27,4 @@ function Lista() {
     )
 }
 
-export default Lista
+export default List
