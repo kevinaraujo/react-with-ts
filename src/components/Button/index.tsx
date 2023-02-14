@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './style.scss'
+
 class Button extends React.Component {
     super() {
         this.super();
@@ -7,7 +9,7 @@ class Button extends React.Component {
 
     render() {
         return (
-            <button>
+            <button className="botao">
                 Button
             </button>
         )
