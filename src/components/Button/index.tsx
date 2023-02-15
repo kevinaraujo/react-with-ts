@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './style.scss'
+import style from './style.module.scss'
 
 class Button extends React.Component {
     super() {
@@ -9,7 +9,7 @@ class Button extends React.Component {
 
     render() {
         return (
-            <button className="botao">
+            <button className={style.botao}>
                 Button
             </button>
         )
