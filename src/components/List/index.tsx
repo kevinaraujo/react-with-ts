@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react'
 import React from 'react'
+import Item from './item'
 
 import style from './style.module.scss'
 
@@ -9,7 +10,7 @@ function List() {
         time: ' 02:00:00'
     }, {
         task: 'Javascript',
-        time: ' 01:00:00'
+        time: ' 02:00:00'
     }]
 
     return (
@@ -17,10 +18,10 @@ function List() {
             <h2>Study of the day</h2>
             <ul>
                 { tasks.map((item, index) => (
-                    <li key={index} className={style.item}>
-                        <h3>{item.task}</h3>
-                        <span>{item.time}</span>
-                    </li>
+                    <Item 
+                        key={index}
+                        {...item}
+                    />
                 ))}
             </ul>
         </aside>
