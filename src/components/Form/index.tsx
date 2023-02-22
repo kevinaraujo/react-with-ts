@@ -1,16 +1,29 @@
-import React from 'react'
+import React, { ReactText } from 'react'
+import { ITask } from '../../types/ITask'
 import Button from '../Button'
 
 import style from './style.module.scss'
 
-class Form extends React.Component {
+class Form extends React.Component<{
+    setTasks: React.Dispatch<React.SetStateAction<ITask[]>>
+}> {
+    state = {
+        time: '00:00:00',
+        task: ''
+    }
+
+    addTask(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        this.props.setTasks(oldTasks => [...oldTasks, {...this.state}]);
+    }
+
     render() {
         return (
-            <form className={style.novaTarefa}>
+            <form className={style.novaTarefa} onSubmit={this.addTask.bind(this)}>
                 <div className={style.inputContainer}>
                     <label htmlFor="task">Add a new study</label>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         name="task"
                         id="task"
                         placeholder="What you want to study?"
@@ -19,17 +32,19 @@ class Form extends React.Component {
                 </div>
                 <div className={style.inputContainer}>
                     <label htmlFor="time">Time</label>
-                    <input 
-                        type="time" 
+                    <input
+                        type="time"
                         step="1"
                         id="time"
                         name="time"
                         min="00:00:00"
                         max="01:30:00"
                         required
+                        value={this.state.time}
+                        onChange={(e) => this.setState({ ...this.state, time: e.target.value })}
                     />
                 </div>
-                <Button>
+                <Button type="submit">
                     Add
                 </Button>
             </form>
