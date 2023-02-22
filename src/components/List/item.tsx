@@ -1,12 +1,9 @@
 
+import { ITask } from '../../types/ITask'
 import style from './style.module.scss'
 
-interface IPropsItem {
-    task: string, 
-    time: string
-}
-
-function Item({task, time}: IPropsItem) {
+function Item({task, time, selected, completed, id}: ITask) {
+    console.log('novo item:', {task, time, selected, completed, id})
     return (
         <li className={style.item}>
             <h3>{task}</h3>
