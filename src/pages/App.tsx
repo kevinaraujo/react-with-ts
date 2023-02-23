@@ -7,12 +7,24 @@ import { ITask } from '../types/ITask';
 import style from './style.module.scss'
 
 function App() {
-  let [ tasks, setTasks ] = useState<ITask[]>([])
+  const [ tasks, setTasks ] = useState<ITask[]>([])
+  const [selected, setSelected] = useState<ITask>();
+
+  function selectTask(task: ITask) {
+    setSelected(task);
+    setTasks(previousTasks => previousTasks.map(task => ({
+      ...task,
+      selected: true
+    })))
+  }
 
   return (
     <div className={style.AppStyle}>
      <Form setTasks={setTasks}/>
-     <List tasks={tasks}/>
+     <List 
+      tasks={tasks}
+      selectTask={selectTask}
+     />
      <Chronometer />
     </div>
   );

@@ -3,16 +3,21 @@ import Item from './item'
 
 import style from './style.module.scss'
 
+interface IProps {
+    tasks: ITask[],
+    selectTask: (task: ITask) => void
+}
 
-function List({ tasks }: { tasks: ITask[]}) {
+function List({ tasks, selectTask }: IProps) {
     
     return (
         <aside className={style.listaTarefas}>
             <h2>Study of the day</h2>
             <ul>
-                { tasks.map((item, index) => (
+                { tasks.map((item) => (
                     <Item 
-                        key={index}
+                        key={item.id}
+                        selectTask={selectTask}
                         {...item}
                     />
                 ))}
