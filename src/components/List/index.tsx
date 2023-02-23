@@ -1,5 +1,5 @@
 import { ITask } from '../../types/ITask'
-import Item from './item'
+import Item from './Item'
 
 import style from './style.module.scss'
 

@@ -1,5 +1,5 @@
 
-import { ITask } from '../../types/ITask'
+import { ITask } from '../../../types/ITask'
 import style from './style.module.scss'
 
 interface IProps extends ITask {
@@ -14,8 +14,6 @@ function Item({
     id,
     selectTask
 }: IProps) {
-    console.log('novo item:', { task, time, selected, completed, id })
-
     return (
         <li 
             className={`${style.item} ${selected && style.itemSelecionado}`} 
