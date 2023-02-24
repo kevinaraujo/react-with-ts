@@ -19,6 +19,15 @@ const Chronometer = ({ selected }: IProps) => {
     }
    }, [selected])
 
+   const regressTime = (counter: number = 0) => {
+        setTimeout(() => {
+            if (counter > 0) {
+                setTime(counter - 1)
+                return regressTime(counter - 1)
+            }
+        }, 1000)
+   }    
+
     return (
         <div className={style.cronometro}>
             <p className={style.titulo}>Choose a card and start the chronometer</p>
@@ -26,7 +35,9 @@ const Chronometer = ({ selected }: IProps) => {
             <div className={style.relogioWrapper}>
                 <Watch time={time}/>
             </div>
-            <Button>
+            <Button onClick={() => {
+                regressTime(time)
+            }}>
                 Iniciar
             </Button>
         </div>
