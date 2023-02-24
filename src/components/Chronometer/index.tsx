@@ -15,7 +15,7 @@ const Chronometer = ({ selected }: IProps) => {
 
    useEffect(() => {
     if (selected?.time) {
-        setTime(timeToSeconds(selected?.time))
+        setTime(timeToSeconds(selected.time))
     }
    }, [selected])
 
@@ -24,7 +24,7 @@ const Chronometer = ({ selected }: IProps) => {
             <p className={style.titulo}>Choose a card and start the chronometer</p>
             Time: {time}
             <div className={style.relogioWrapper}>
-                <Watch />
+                <Watch time={time}/>
             </div>
             <Button>
                 Iniciar
