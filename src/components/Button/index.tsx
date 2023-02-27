@@ -1,23 +1,21 @@
-import React from 'react'
-
 import style from './style.module.scss'
 
-class Button extends React.Component<{
-    children: any, 
+interface IProps {
+    children: any,
     type?: "button" | "submit" | "reset" | undefined,
     onClick?: () => void
-}>{
-   
+}
 
-    render() {
-        const { type = "button", onClick }= this.props;
-
-        return (
-            <button onClick={onClick} type={type} className={style.botao}>
-                { this.props.children }
-            </button>
-        )
-    }
+const Button = ({ children, type, onClick }: IProps) => {
+    return (
+        <button
+            onClick={onClick}
+            type={type}
+            className={style.botao}
+        >
+            {children}
+        </button>
+    )
 }
 
 export default Button

@@ -1,24 +1,25 @@
-import React, { ReactText } from 'react'
+import React, { ReactText, useState } from 'react'
 import { ITask } from '../../types/ITask'
 import Button from '../Button'
 import style from './style.module.scss'
 import { v4 as uuidv4 } from 'uuid'
 
-class Form extends React.Component<{
+interface IProps {
     setTasks: React.Dispatch<React.SetStateAction<ITask[]>>
-}> {
-    state = {
-        time: '00:00:00',
-        task: ''
-    }
+}
 
-    addTask(e: React.FormEvent<HTMLFormElement>) {
+const Form = ({ setTasks }: IProps) => {
+    const [task, setTask] = useState('')
+    const [time, setTime] = useState('00:00:00')
+
+    function addTask(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        this.props.setTasks(oldTasks => 
+        setTasks(oldTasks => 
             [
                 ...oldTasks, 
                 {
-                    ...this.state,
+                    task,
+                    time,
                     selected: false,
                     completed: false,
                     id: uuidv4()
@@ -26,47 +27,44 @@ class Form extends React.Component<{
             ]
         );
 
-        this.setState({
-            time: '00:00:00',
-            task: ''
-        })
+        setTask('')
+        setTime('00:00:00')
     }
 
-    render() {
-        return (
-            <form className={style.novaTarefa} onSubmit={this.addTask.bind(this)}>
-                <div className={style.inputContainer}>
-                    <label htmlFor="task">Add a new study</label>
-                    <input
-                        type="text"
-                        name="task"
-                        id="task"
-                        placeholder="What you want to study?"
-                        required
-                        value={this.state.task}
-                        onChange={(e) => this.setState({...this.state, task: e.target.value})}
-                    />
-                </div>
-                <div className={style.inputContainer}>
-                    <label htmlFor="time">Time</label>
-                    <input
-                        type="time"
-                        step="1"
-                        id="time"
-                        name="time"
-                        min="00:00:00"
-                        max="01:30:00"
-                        required
-                        value={this.state.time}
-                        onChange={(e) => this.setState({ ...this.state, time: e.target.value })}
-                    />
-                </div>
-                <Button type="submit">
-                    Add
-                </Button>
-            </form>
-        )
-    }
+
+    return (
+        <form className={style.novaTarefa} onSubmit={addTask}>
+            <div className={style.inputContainer}>
+                <label htmlFor="task">Add a new study</label>
+                <input
+                    type="text"
+                    name="task"
+                    id="task"
+                    placeholder="What you want to study?"
+                    required
+                    value={task}
+                    onChange={(e) => setTask(e.target.value)}
+                />
+            </div>
+            <div className={style.inputContainer}>
+                <label htmlFor="time">Time</label>
+                <input
+                    type="time"
+                    step="1"
+                    id="time"
+                    name="time"
+                    min="00:00:00"
+                    max="01:30:00"
+                    required
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                />
+            </div>
+            <Button type="submit">
+                Add
+            </Button>
+        </form>
+    )
 }
 
 export default Form
