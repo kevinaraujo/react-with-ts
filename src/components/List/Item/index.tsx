@@ -16,7 +16,7 @@ function Item({
 }: IProps) {
     return (
         <li 
-            className={`${style.item} ${selected && style.itemSelecionado}`} 
+            className={`${style.item} ${selected && style.itemSelecionado} ${completed && style.itemCompletado}`} 
             onClick={
                 () => selectTask({
                     task, 
@@ -28,6 +28,7 @@ function Item({
             }>
             <h3>{task}</h3>
             <span>{time}</span>
+            {completed && <span className={style.concluido} aria-label="task completed"></span>}
         </li>
     )
 }
