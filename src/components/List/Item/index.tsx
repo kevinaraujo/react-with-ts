@@ -18,7 +18,7 @@ function Item({
         <li 
             className={`${style.item} ${selected && style.itemSelecionado} ${completed && style.itemCompletado}`} 
             onClick={
-                () => selectTask({
+                () => !completed && selectTask({
                     task, 
                     time, 
                     selected, 
