@@ -8,9 +8,10 @@ import { useEffect, useState } from "react"
 
 interface IProps {
     selected: ITask | undefined   
+    finishTask: () => void
 }
 
-const Chronometer = ({ selected }: IProps) => {
+const Chronometer = ({ selected, finishTask }: IProps) => {
     const [time, setTime] = useState<number>()
 
    useEffect(() => {
@@ -24,6 +25,8 @@ const Chronometer = ({ selected }: IProps) => {
             if (counter > 0) {
                 setTime(counter - 1)
                 return regressTime(counter - 1)
+            } else {
+                finishTask()
             }
         }, 1000)
    }    
